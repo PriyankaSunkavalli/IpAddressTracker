@@ -1,24 +1,50 @@
-import logo from './logo.svg';
-import './App.css';
+import logo from "./logo.svg";
+import "./App.css";
+import styled from "styled-components";
+import SearchBar from "./components/SearchBar";
+import LocationDetails from "./components/LocationDetails";
+import MapsEx from "./components/MapsEx";
+import { useState } from "react";
+
+const Root = styled.div``;
+
+const BgImg = styled.div`
+  position: relative;
+  img {
+    width: 100%;
+  }
+`;
+
+const Title = styled.div`
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  position: absolute;
+  width: 100%;
+  flex-direction: column;
+
+  top: 0;
+  h1 {
+    text-align: center;
+    color: white;
+  }
+`;
 
 function App() {
+  const [data, setData] = useState(null);
+
   return (
-    <div className="App">
-      <header className="App-header">
-        <img src={logo} className="App-logo" alt="logo" />
-        <p>
-          Edit <code>src/App.js</code> and save to reload.
-        </p>
-        <a
-          className="App-link"
-          href="https://reactjs.org"
-          target="_blank"
-          rel="noopener noreferrer"
-        >
-          Learn React
-        </a>
-      </header>
-    </div>
+    <Root>
+      <BgImg>
+        <img src="/images/pattern-bg.png"></img>
+      </BgImg>
+      <Title>
+        <h1>IP Address Tracker</h1>
+        <SearchBar />
+        <LocationDetails data={data} setData={setData} />
+      </Title>
+      {data && <MapsEx data={data} />}
+    </Root>
   );
 }
 
